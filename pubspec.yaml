@@ -11,6 +11,8 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
+  flutter_dotenv: ^5.0.2
+  flutter_paystack: ^1.0.5
 
 dev_dependencies:
   flutter_test:
