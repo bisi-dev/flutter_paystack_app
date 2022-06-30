@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_paystack/flutter_paystack.dart';
 
@@ -16,6 +17,34 @@ class _CheckOutPageState extends State<CheckOutPage> {
     await dotenv.load(fileName: '.env');
     String? publicKey = dotenv.env['PUBLIC_KEY'];
     payStackClient.initialize(publicKey: publicKey!);
+  }
+
+  final snackBarSuccess = SnackBar(
+    content: Text('Payment Successful, Thanks for your patronage !'),
+  );
+
+  final snackBarFailure = SnackBar(
+    content: Text('Payment Unsuccessful, Please Try Again.'),
+  );
+
+  final int amount = 100000;
+  final String reference =
+      "unique_transaction_ref_${Random().nextInt(1000000)}";
+
+  void _makePayment() async {
+    final Charge charge = Charge()
+      ..email = 'paystackcustomer@qa.team'
+      ..amount = amount
+      ..reference = reference;
+
+    final CheckoutResponse response = await payStackClient.checkout(context,
+        charge: charge, method: CheckoutMethod.card);
+
+    if (response.status && response.reference == reference) {
+      ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(snackBarFailure);
+    }
   }
 
   @override
@@ -38,6 +67,21 @@ class _CheckOutPageState extends State<CheckOutPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CheckOutCard(),
+        ],
+      ),
+    );
+  }
+
+  Widget CheckOutSummary() {
+    return Padding(
+      padding: const EdgeInsets.all(22.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Text(
+            'Total: ₦ ${(amount / 100).toStringAsFixed(2)}',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
         ],
       ),
     );
