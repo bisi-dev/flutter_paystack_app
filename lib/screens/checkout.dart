@@ -10,6 +10,20 @@ class CheckOutPage extends StatefulWidget {
 }
 
 class _CheckOutPageState extends State<CheckOutPage> {
+  final payStackClient = PaystackPlugin();
+
+  void _startPaystack() async {
+    await dotenv.load(fileName: '.env');
+    String? publicKey = dotenv.env['PUBLIC_KEY'];
+    payStackClient.initialize(publicKey: publicKey!);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _startPaystack();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

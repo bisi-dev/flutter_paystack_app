@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Paystack',
-      theme: ThemeData.dark(),
+      theme: ThemeData.light(),
       home: const CheckOutPage(),
       debugShowCheckedModeBanner: false,
     );
