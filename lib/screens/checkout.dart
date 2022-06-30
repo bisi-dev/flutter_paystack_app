@@ -89,7 +89,9 @@ class _CheckOutPageState extends State<CheckOutPage> {
 
   Widget CheckOutCard() {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        _makePayment();
+      },
       child: Card(
         margin: EdgeInsets.symmetric(horizontal: 10),
         color: Colors.blueAccent,
