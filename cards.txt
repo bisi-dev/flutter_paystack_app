@@ -1,0 +1,29 @@
+Test No Validation
+Card number: 408 408 408 408 408 1
+cvv: 408
+Expiry: 07/23
+
+Test PIN validation
+Card number: 5078 5078 5078 5078 12
+cvv: 081
+Expiry: 07/23
+Pin: 1111
+
+Test PIN + OTP validation
+Card number: 5060 6666 6666 6666 666
+cvv: 123
+Expiry: 07/23
+Pin: 1234
+OTP: 123456
+
+Test PIN + Phone + OTP validation
+Card number: 5078 5078 5078 5078 04
+cvv: 884
+Expiry: 07/23
+Pin: 0000
+OTP: 123456
+
+Test Bank Auth Simulation
+Card number: 4084 0800 0000 0409
+cvv: 000
+Expiry: 07/23
